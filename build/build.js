@@ -29699,16 +29699,18 @@ ReactDOM.render(React.createElement(
     'Hello, world!'
 ), document.getElementById('container'));
 
-console.log('helloz');
-
 $('button').click(function () {
-    console.log('hello');
-    console.log($('#username'));
     var username = $('#username').val();
     var password = $('#password').val();
     var url = 'https://' + username + ':' + password + '@api.github.com/user/starred/babel/babelify';
     console.log(url);
-    request.put(url);
+    request.put(url).end(function (err, res) {
+        if (err || !res.ok) {
+            alert('Oh no! error');
+        } else {
+            alert('yay got ' + JSON.stringify(res.body));
+        }
+    });
 });
 
 },{"jQuery":2,"react":159,"react-dom":3,"superagent":160}]},{},[163])
