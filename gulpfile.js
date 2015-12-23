@@ -17,6 +17,7 @@ function compile(watch) {
     var bundler = watch ? watchify(browserifyTransform): browserifyTransform;
 
     function rebundle() {
+        console.log('-> bundling...');
         bundler.bundle()
             .on('error', function(err) { console.error(err); this.emit('end'); })
             .pipe(source('build.js'))
@@ -28,7 +29,6 @@ function compile(watch) {
 
     if (watch) {
         bundler.on('update', function() {
-            console.log('-> bundling...');
             rebundle();
         });
     }
