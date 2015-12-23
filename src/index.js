@@ -2,20 +2,22 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var request = require('superagent');
 
-//function starRepo(repo, username, password) {
-//    let url = 'https://' + username + ':' + password + '@api.github.com/user/starred/babel/babelify';
-//    console.log(url);
-//    request
-//        .put(url)
-//        .end(function(err, res){
-//            if (err || !res.ok) {
-//                alert('Oh no! error');
-//            } else {
-//                alert('yay got ' + JSON.stringify(res.body));
-//            }
-//        });
-//}
-
+function starRepo(usernameRepo, username, password) {
+    // usernameRepo should look like username/repo
+    //let url = 'https://api.github.com/user/starred/babel/babelify';
+    let url = 'https://api.github.com/user/starred/' + usernameRepo;
+    console.log(url);
+    request
+        .put(url)
+        .auth(username, password)
+        .end(function(err, res){
+            if (err || !res.ok) {
+                alert('Oh no! error');
+            } else {
+                alert('yay got ' + JSON.stringify(res.body));
+            }
+        });
+}
 
 class App extends React.Component {
     constructor(props) {
