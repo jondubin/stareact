@@ -22,7 +22,9 @@
     "watchify": "^3.6.1"
   },
   "dependencies": {
+    "jquery": "^2.1.4",
     "react": "^0.14.3",
-    "react-dom": "^0.14.3"
+    "react-dom": "^0.14.3",
+    "superagent": "^1.6.1"
   }
 }
