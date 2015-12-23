@@ -1,5 +1,5 @@
-import React from 'react'
-import request from 'superagent'
+import React from 'react';
+import request from 'superagent';
 
 let repos = ['jondubin/stareact', 'uber/go-torch', 'aharelick/cis555-project'];
 

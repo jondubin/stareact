@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {Login} from './login.js'
-import {RepoList} from './repos.js'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Login} from './login.js';
+import {RepoList} from './repos.js';
 
 
 class App extends React.Component {
