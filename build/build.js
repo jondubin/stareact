@@ -20533,21 +20533,40 @@ var App = (function (_React$Component) {
         key: 'render',
         value: function render() {
             if (this.state.validLogin) {
-                return _react2.default.createElement(_repos.RepoList, null);
+                var content = _react2.default.createElement(_repos.RepoList, null);
             } else {
-                return _react2.default.createElement(_login.Login, { username: this.state.username,
+                var content = _react2.default.createElement(_login.Login, { username: this.state.username,
                     password: this.state.password,
                     handleUsernameChange: this.handleUsernameChange.bind(this),
                     handlePasswordChange: this.handlePasswordChange.bind(this),
                     makeLoginValid: this.makeLoginValid.bind(this) });
             }
+
+            return _react2.default.createElement(
+                'div',
+                { className: 'container' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row eight columns offset-by-four' },
+                    _react2.default.createElement(
+                        'h1',
+                        null,
+                        'stareact'
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    content
+                )
+            );
         }
     }]);
 
     return App;
 })(_react2.default.Component);
 
-_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('container'));
+_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('mount'));
 
 },{"./login.js":163,"./repos.js":164,"react":158,"react-dom":2}],163:[function(require,module,exports){
 'use strict';
@@ -20582,26 +20601,60 @@ var Login = exports.Login = (function (_React$Component) {
 
     _createClass(Login, [{
         key: 'checkLogin',
-        value: function checkLogin(username, password) {
+        value: function checkLogin(event) {
             var loginIsValid = true;
             if (loginIsValid) {
                 this.props.makeLoginValid();
             } else {
                 console.log('hey your login is not valid');
             }
+            event.preventDefault();
+            return false;
         }
     }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement('input', { type: 'text', onChange: this.props.handleUsernameChange, value: this.props.username, id: 'username' }),
-                _react2.default.createElement('input', { type: 'text', onChange: this.props.handlePasswordChange, value: this.props.password, id: 'password' }),
+                'form',
+                { onSubmit: this.checkLogin.bind(this) },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'three columns' },
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            'Your GitHub username'
+                        ),
+                        _react2.default.createElement('input', { className: 'u-full-width',
+                            type: 'text',
+                            onChange: this.props.handleUsernameChange,
+                            value: this.props.username })
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'three columns' },
+                        _react2.default.createElement(
+                            'label',
+                            null,
+                            'Your GitHub password'
+                        ),
+                        _react2.default.createElement('input', { className: 'u-full-width',
+                            type: 'password',
+                            onChange: this.props.handlePasswordChange,
+                            value: this.props.password })
+                    )
+                ),
                 _react2.default.createElement(
                     'button',
-                    { onClick: this.checkLogin.bind(this) },
-                    'Submit'
+                    { className: 'button-primary', type: 'submit' },
+                    'Login'
                 )
             );
         }

@@ -28,19 +28,28 @@ class App extends React.Component {
 
     render() {
         if (this.state.validLogin) {
-            return <RepoList />;
+            var content =  <RepoList />;
         } else {
-            return <Login username={this.state.username}
-                          password={this.state.password}
-                          handleUsernameChange={this.handleUsernameChange.bind(this)}
-                          handlePasswordChange={this.handlePasswordChange.bind(this)}
-                          makeLoginValid={this.makeLoginValid.bind(this)}/>;
+            var content = <Login username={this.state.username}
+                                 password={this.state.password}
+                                 handleUsernameChange={this.handleUsernameChange.bind(this)}
+                                 handlePasswordChange={this.handlePasswordChange.bind(this)}
+                                 makeLoginValid={this.makeLoginValid.bind(this)}/>;
         }
+
+        return (
+            <div className='container'>
+                <div className='row eight columns offset-by-four'>
+                    <h1>stareact</h1>
+                </div>
+                <div className='row'>{content}</div>
+            </div>
+        );
     }
 }
 
 
 ReactDOM.render(
     <App />,
-    document.getElementById('container')
+    document.getElementById('mount')
 );

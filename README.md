@@ -21,7 +21,7 @@ here:  [github-pages url]
 
 To build:
 
-1. Install project dependencies: `npm install`
+1. Install project dependencies: `npm install` and `bower install`
 
 2. Install the Gulp CLI: `npm install --global gulp`
 
