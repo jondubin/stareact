@@ -61,7 +61,7 @@ class Login extends React.Component {
         if (loginIsValid) {
             this.props.makeLoginValid();
         } else {
-            console.log('hey your login is not valid);
+            console.log('hey your login is not valid');
         }
     }
 
