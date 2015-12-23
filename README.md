@@ -19,7 +19,7 @@ To build:
 
 1. Install project dependencies: `npm install`
 
-2. Install the Gulp cli: npm install --global gulp
+2. Install the Gulp cli: `npm install --global gulp`
 
 3. For a one-off build, `gulp build` or to watch
 the directory and rebuild on changes: `gulp watch`
