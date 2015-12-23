@@ -20478,29 +20478,25 @@ module.exports = function(arr, fn, initial){
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _login = require('./login.js');
+
+var _repos = require('./repos.js');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var React = require('react');
-var ReactDOM = require('react-dom');
-var request = require('superagent');
-
-function starRepo(usernameRepo, username, password) {
-    // usernameRepo should look like username/repo
-    //let url = 'https://api.github.com/user/starred/babel/babelify';
-    var url = 'https://api.github.com/user/starred/' + usernameRepo;
-    console.log(url);
-    request.put(url).auth(username, password).end(function (err, res) {
-        if (err || !res.ok) {
-            alert('Oh no! error');
-        } else {
-            alert('yay got ' + JSON.stringify(res.body));
-        }
-    });
-}
 
 var App = (function (_React$Component) {
     _inherits(App, _React$Component);
@@ -20537,13 +20533,9 @@ var App = (function (_React$Component) {
         key: 'render',
         value: function render() {
             if (this.state.validLogin) {
-                return React.createElement(
-                    'h1',
-                    null,
-                    'Nice'
-                );
+                return _react2.default.createElement(_repos.RepoList, null);
             } else {
-                return React.createElement(Login, { username: this.state.username,
+                return _react2.default.createElement(_login.Login, { username: this.state.username,
                     password: this.state.password,
                     handleUsernameChange: this.handleUsernameChange.bind(this),
                     handlePasswordChange: this.handlePasswordChange.bind(this),
@@ -20553,10 +20545,34 @@ var App = (function (_React$Component) {
     }]);
 
     return App;
-})(React.Component);
+})(_react2.default.Component);
 
-var Login = (function (_React$Component2) {
-    _inherits(Login, _React$Component2);
+_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('container'));
+
+},{"./login.js":163,"./repos.js":164,"react":158,"react-dom":2}],163:[function(require,module,exports){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.Login = undefined;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Login = exports.Login = (function (_React$Component) {
+    _inherits(Login, _React$Component);
 
     function Login() {
         _classCallCheck(this, Login);
@@ -20567,7 +20583,7 @@ var Login = (function (_React$Component2) {
     _createClass(Login, [{
         key: 'checkLogin',
         value: function checkLogin(username, password) {
-            var loginIsValid = false;
+            var loginIsValid = true;
             if (loginIsValid) {
                 this.props.makeLoginValid();
             } else {
@@ -20577,14 +20593,14 @@ var Login = (function (_React$Component2) {
     }, {
         key: 'render',
         value: function render() {
-            return React.createElement(
+            return _react2.default.createElement(
                 'div',
                 null,
-                React.createElement('input', { type: 'text', onChange: this.props.handleUsernameChange, value: this.props.username, id: 'username' }),
-                React.createElement('input', { type: 'text', onChange: this.props.handlePasswordChange, value: this.props.password, id: 'password' }),
-                React.createElement(
+                _react2.default.createElement('input', { type: 'text', onChange: this.props.handleUsernameChange, value: this.props.username, id: 'username' }),
+                _react2.default.createElement('input', { type: 'text', onChange: this.props.handlePasswordChange, value: this.props.password, id: 'password' }),
+                _react2.default.createElement(
                     'button',
-                    { onClick: this.checkLogin },
+                    { onClick: this.checkLogin.bind(this) },
                     'Submit'
                 )
             );
@@ -20592,11 +20608,114 @@ var Login = (function (_React$Component2) {
     }]);
 
     return Login;
-})(React.Component);
+})(_react2.default.Component);
 
-ReactDOM.render(React.createElement(App, null), document.getElementById('container'));
+},{"react":158}],164:[function(require,module,exports){
+'use strict';
 
-},{"react":158,"react-dom":2,"superagent":159}]},{},[162])
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.RepoList = undefined;
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _superagent = require('superagent');
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var repos = ['jondubin/stareact', 'uber/go-torch', 'aharelick/cis555-project'];
+
+function starRepo(usernameRepo, username, password) {
+    // usernameRepo should look like username/repo
+    //let url = 'https://api.github.com/user/starred/babel/babelify';
+    var url = 'https://api.github.com/user/starred/' + usernameRepo;
+    _superagent2.default.put(url).auth(username, password).end(function (err, res) {
+        if (err || !res.ok) {
+            alert('Oh no! error');
+        } else {
+            alert('yay got ' + JSON.stringify(res.body));
+        }
+    });
+}
+
+var Repo = (function (_React$Component) {
+    _inherits(Repo, _React$Component);
+
+    function Repo() {
+        _classCallCheck(this, Repo);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(Repo).apply(this, arguments));
+    }
+
+    _createClass(Repo, [{
+        key: 'render',
+        value: function render() {
+            var fullRepoNameSplit = this.props.fullRepoName.split('/');
+            var userName = fullRepoNameSplit[0];
+            var repoName = fullRepoNameSplit[1];
+
+            return _react2.default.createElement(
+                'li',
+                null,
+                _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    userName
+                ),
+                '/',
+                _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    repoName
+                )
+            );
+        }
+    }]);
+
+    return Repo;
+})(_react2.default.Component);
+
+var RepoList = exports.RepoList = (function (_React$Component2) {
+    _inherits(RepoList, _React$Component2);
+
+    function RepoList() {
+        _classCallCheck(this, RepoList);
+
+        return _possibleConstructorReturn(this, Object.getPrototypeOf(RepoList).apply(this, arguments));
+    }
+
+    _createClass(RepoList, [{
+        key: 'render',
+        value: function render() {
+            var repoComponents = repos.map(function (fullRepoName) {
+                return _react2.default.createElement(Repo, { key: fullRepoName, fullRepoName: fullRepoName });
+            });
+
+            return _react2.default.createElement(
+                'ul',
+                null,
+                repoComponents
+            );
+        }
+    }]);
+
+    return RepoList;
+})(_react2.default.Component);
+
+},{"react":158,"superagent":159}]},{},[162])
 
 
 //# sourceMappingURL=build.js.map

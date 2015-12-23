@@ -1,22 +1,8 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var request = require('superagent');
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {Login} from './login.js'
+import {RepoList} from './repos.js'
 
-function starRepo(usernameRepo, username, password) {
-    // usernameRepo should look like username/repo
-    //let url = 'https://api.github.com/user/starred/babel/babelify';
-    let url = 'https://api.github.com/user/starred/' + usernameRepo;
-    request
-        .put(url)
-        .auth(username, password)
-        .end(function(err, res){
-            if (err || !res.ok) {
-                alert('Oh no! error');
-            } else {
-                alert('yay got ' + JSON.stringify(res.body));
-            }
-        });
-}
 
 class App extends React.Component {
     constructor(props) {
@@ -42,7 +28,7 @@ class App extends React.Component {
 
     render() {
         if (this.state.validLogin) {
-            return <h1>Nice</h1>;
+            return <RepoList />;
         } else {
             return <Login username={this.state.username}
                           password={this.state.password}
@@ -50,28 +36,6 @@ class App extends React.Component {
                           handlePasswordChange={this.handlePasswordChange.bind(this)}
                           makeLoginValid={this.makeLoginValid.bind(this)}/>;
         }
-    }
-}
-
-class Login extends React.Component {
-
-    checkLogin(username, password) {
-        let loginIsValid = false;
-        if (loginIsValid) {
-            this.props.makeLoginValid();
-        } else {
-            console.log('hey your login is not valid');
-        }
-    }
-
-    render() {
-        return (
-            <div>
-                <input type="text" onChange={this.props.handleUsernameChange} value={this.props.username} id="username" />
-                <input type="text" onChange={this.props.handlePasswordChange} value={this.props.password} id="password" />
-                <button onClick={this.checkLogin}>Submit</button>
-            </div>
-        );
     }
 }
 
