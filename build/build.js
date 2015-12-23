@@ -20488,6 +20488,20 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var request = require('superagent');
 
+function starRepo(usernameRepo, username, password) {
+    // usernameRepo should look like username/repo
+    //let url = 'https://api.github.com/user/starred/babel/babelify';
+    var url = 'https://api.github.com/user/starred/' + usernameRepo;
+    console.log(url);
+    request.put(url).auth(username, password).end(function (err, res) {
+        if (err || !res.ok) {
+            alert('Oh no! error');
+        } else {
+            alert('yay got ' + JSON.stringify(res.body));
+        }
+    });
+}
+
 var App = (function (_React$Component) {
     _inherits(App, _React$Component);
 
@@ -20503,22 +20517,6 @@ var App = (function (_React$Component) {
         };
         return _this;
     }
-    //
-    //login() {
-    //    let username = $('#username').val();
-    //    let password = $('#password').val();
-    //    let url = 'https://' + username + ':' + password + '@api.github.com/user/starred/babel/babelify';
-    //    console.log(url);
-    //    request
-    //        .put(url)
-    //        .end(function(err, res){
-    //            if (err || !res.ok) {
-    //                alert('Oh no! error');
-    //            } else {
-    //                alert('yay got ' + JSON.stringify(res.body));
-    //            }
-    //        });
-    //}
 
     _createClass(App, [{
         key: 'makeLoginValid',
@@ -20569,8 +20567,12 @@ var Login = (function (_React$Component2) {
     _createClass(Login, [{
         key: 'checkLogin',
         value: function checkLogin(username, password) {
-            // check username and password
-            //this.props.makeLoginValid();
+            var loginIsValid = false;
+            if (loginIsValid) {
+                this.props.makeLoginValid();
+            } else {
+                console.log('hey your login is not valid');
+            }
         }
     }, {
         key: 'render',

@@ -1,8 +1,24 @@
 # stareact
 A simple app for helping people star a set of GitHub projects
 
-To build and use:
-1) npm install
-2) install the gulp cli
-3) `gulp build` for a one-off build, or `gulp watch` for it to re-build every time you make a change
-4) open index.html
+We wanted an easy way to help our members star/bookmark
+our GitHub projects. We also wanted to avoid having to
+host the project somewhere. The result is a React app
+that runs entirely on the client and can be served up via
+GitHub pages.
+
+A user can go the app, login to their GitHub account,
+and click a single button to star a set of GitHub
+repos at once.
+
+The running app can be found at: [github-pages url]
+
+To use, either specify the username/repo strings in repos.json
+or send a link like so: [example link]
+
+To build:
+1. Install project dependencies: `npm install`
+2. Install the Gulp cli: npm install --global gulp
+3. For a one-off build, `gulp build` or to watch
+the directory and rebuild on changes: `gulp watch`
+4. Open `index.html` to see the running app

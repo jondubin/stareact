@@ -6,7 +6,6 @@ function starRepo(usernameRepo, username, password) {
     // usernameRepo should look like username/repo
     //let url = 'https://api.github.com/user/starred/babel/babelify';
     let url = 'https://api.github.com/user/starred/' + usernameRepo;
-    console.log(url);
     request
         .put(url)
         .auth(username, password)
