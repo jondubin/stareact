@@ -14,7 +14,6 @@
     "tests"
   ],
   "dependencies": {
-    "octicons": "~3.3.0",
-    "skeleton": "~2.0.4"
+    "octicons": "~3.3.0"
   }
 }

@@ -13,7 +13,9 @@ function compile(watch) {
         entries: './src/index.js'
     };
 
-    var browserifyTransform = browserify(props).transform("babelify", {presets: ["es2015", "react"]});
+    var browserifyTransform = browserify(props).transform("babelify",
+        {presets: ["es2015", "react"]},
+        {plugins: "transform-regenerator"});
     var bundler = watch ? watchify(browserifyTransform): browserifyTransform;
 
     function rebundle() {

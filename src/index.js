@@ -1,8 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import {Login} from './login.js'
-import {RepoList} from './repos.js'
-
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Login} from './login.js';
+import {RepoList} from './repos.js';
+import request from 'superagent';
+import reposJson from '../repos.json';
 
 class App extends React.Component {
     constructor(props) {
@@ -10,9 +11,46 @@ class App extends React.Component {
         this.state = {
             username: "",
             password: "",
-            validLogin: false
-        }
+            validLogin: false,
+            validRepos: [],
+            errorValidating: false
+        };
+        this.addRepos();
     }
+
+    addRepos() {
+        // will validate and add repos in the url if present,
+        // othwerise will add from JSON
+
+        if (false) {
+
+        } else {
+            this.state.validRepos = reposJson.repos;
+        }
+
+    }
+
+    //getValidRepos(repos) {
+    //    repos.forEach((repo) => {
+    //        let url = 'https://api.github.com/repos/' + repo;
+    //        request
+    //            .get(url)
+    //            .end((err, res) => {
+    //                if (!err && res.ok) {
+    //                    if (this.state.validRepos.indexOf(repo) === -1) {
+    //                        this.setState((state) => {
+    //                                {
+    //                                    validRepos: state.validRepos.push(repo)
+    //                                }
+    //                            }
+    //                        );
+    //                    }
+    //                } else {
+    //                    this.setState({errorValidating: true})
+    //                }
+    //            });
+    //    })
+    //}
 
     makeLoginValid() {
         this.setState({validLogin: true});
@@ -28,7 +66,9 @@ class App extends React.Component {
 
     render() {
         if (this.state.validLogin) {
-            var content =  <RepoList />;
+            var content =  <RepoList username={this.state.username}
+                                     password={this.state.password}
+                                     repos={this.state.validRepos}/>;
         } else {
             var content = <Login username={this.state.username}
                                  password={this.state.password}
@@ -39,10 +79,15 @@ class App extends React.Component {
 
         return (
             <div className='container'>
-                <div className='row eight columns offset-by-four'>
-                    <h1>stareact</h1>
+                <div>
+                    <div className='row'>
+                        <div className='text-center'>
+                            <h1>stareact</h1>
+                            <br />
+                        </div>
+                    </div>
                 </div>
-                <div className='row'>{content}</div>
+                {content}
             </div>
         );
     }
