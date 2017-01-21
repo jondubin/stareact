@@ -1,3 +1,24 @@
 {
-  "repos": ["jondubin/stareact", "uber/go-torch", "aharelick/cis555-project"]
+  "repos": [
+    "hack4impact/flask-base",
+    "hack4impact/maps4all",
+    "hack4impact/maps4all-jlc-sp2",
+    "hack4impact/berkman",
+    "hack4impact/cls",
+    "hack4impact/idle-free-philly",
+    "hack4impact/UAC",
+    "hack4impact/asylum-connect-catalog",
+    "hack4impact/women-veterans-rock",
+    "hack4impact/reading-terminal-market",
+    "hack4impact/busy-booth",
+    "hack4impact/gpcah",
+    "hack4impact/journalup",
+    "hack4impact/Givology",
+    "hack4impact/ican",
+    "hack4impact/lcag",
+    "hack4impact/Kiva",
+    "hack4impact/2015-project-starter-code",
+    "hack4impact/transcribe4all",
+    "hack4impact/2015-project-tester"
+    ]
 }
